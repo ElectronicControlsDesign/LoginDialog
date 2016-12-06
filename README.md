@@ -23,4 +23,7 @@ contain UTF-8 strings. Username and password values will also contain UTF-8 stri
 
 The dialog is fixed in size at runtime but must display on a wide range of display sizes. 
 
+The dialog will be reused in multiple applications. To help with this, modularizing the dialog is important. 
+Lack of modularity will carefully scrutinized. 
+
 The goal is to estimate on how long it should take us to implement this dialog. 
