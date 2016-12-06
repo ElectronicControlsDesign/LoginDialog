@@ -16,3 +16,6 @@ include(deployment.pri)
 
 HEADERS += \
     LoginDlg.h
+
+DISTFILES += \
+    LoginDlg.qml
