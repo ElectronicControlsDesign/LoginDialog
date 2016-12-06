@@ -8,8 +8,6 @@ Dialog {
     standardButtons: StandardButton.Ok | StandardButton.Cancel
 
     Column {
-        width: parent.width
-        height: parent.height
         Text {
             id: lbl_username
             text: "Username:"

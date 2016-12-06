@@ -13,6 +13,6 @@ Rectangle {
 
     Text {
         anchors.centerIn: parent
-        text: "Hello World"
+        text: "Click to show Login Dialog"
     }
 }

@@ -12,13 +12,15 @@ Window {
     MainForm {
         anchors.fill: parent
         mouseArea.onClicked: {
-            Qt.quit()
+            loginDlg.visible = true
         }
     }
 
     LoginDlg {
         id: loginDlg
         objectName: "LoginDlg"
+        width: 200
+        height: 150
 
         onAccepted: {
             console.log("QML mainWindow.OnAccepted.")

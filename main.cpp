@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 
     // TODO: Move to place to invoke after application is running and only when user asks for login.
     const auto const qmlRootContext = engine.rootContext(); // TODO: How do I tell the variable type Qt Creator? // Need to work out the warning here
+    //
     if (qmlRootContext != nullptr)
     {
         const auto const firstObject = engine.rootObjects().first(); // TODO: Is this the top of the QML tree?
