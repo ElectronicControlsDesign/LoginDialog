@@ -19,7 +19,9 @@ need to be run though a C++ hash function in order to know if the password
 should be shown in green. 
 
 The Username and Password label text will come from a C++ method call and will
-contain UTF-8 strings. Username and password values will also contain UTF-8 strings.
+contain UTF-8 strings. Username and password values will also contain UTF-8 strings. 
+Since languages may translate into longer and shorter text for "Username" and "Password", the 
+dialog must adjust for this. Right justify labels to account for this difference. 
 
 The dialog is fixed in size at runtime but must display on a wide range of display sizes. 
 
