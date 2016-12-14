@@ -1,10 +1,9 @@
-TEMPLATE = app
-
 QT += qml quick
+
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    LoginDlg.cpp
+    login.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,7 +14,4 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    LoginDlg.h
-
-DISTFILES += \
-    LoginDlg.qml
+    login.h
