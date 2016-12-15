@@ -18,7 +18,8 @@ class Login : public QObject
     QString m_userpw;
 
     QList<users> m_Users;
-
+    int m_UserWidth;
+    int m_pwWidth;
 
 
 
@@ -34,6 +35,9 @@ public:
 
     Q_INVOKABLE void setUser(int index);
     Q_INVOKABLE void setUserPw(QString pw);
+
+    Q_INVOKABLE int userWidth() const;
+    Q_INVOKABLE int pwWidth() const;
 
 
 signals:

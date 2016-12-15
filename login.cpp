@@ -1,9 +1,22 @@
 #include "login.h"
 
+int Login::userWidth() const
+{
+    return m_UserWidth;
+}
+
+int Login::pwWidth() const
+{
+    return m_pwWidth;
+}
+
 Login::Login(QObject *parent) : QObject(parent)
 {
-
+    
     // not thought out for economy!!
+
+    m_UserWidth = 0;
+    m_pwWidth = 0;
 
     m_user.name="";
     m_user.pw="ZZZZ";
@@ -26,7 +39,21 @@ Login::Login(QObject *parent) : QObject(parent)
 
     m_Users.append(m_user);
 
-    m_userlist << " " << "Bob" << "Mary" << "Joe";
+    m_user.name = "Raja Vishvanaathen";
+    m_user.pw="The Tajmahal";
+
+    m_Users.append(m_user);
+
+    m_userlist << " " << "Bob" << "Mary" << "Joe" << "Raja Vishvanaathen";
+
+    // set name and pw widest widths for QML dialog use
+    foreach( users user, m_Users){
+        if(user.name.length() > m_UserWidth)
+            m_UserWidth = user.name.length();
+
+        if(user.pw.length() > m_pwWidth)
+            m_pwWidth = user.pw.length();
+    }
 
 }
 
