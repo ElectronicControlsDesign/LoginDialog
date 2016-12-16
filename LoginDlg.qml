@@ -13,34 +13,15 @@ Window {
     flags: Qt.Dialog
 
     Item {
-        Connections {
-            target: Login
-            onPassed: {
-                rectangle1.color="green"
-                button1.enabled=true
-            }
-
-            onFailed:  {
-                rectangle1.color="white"
-                button1.enabled=false
-            }
-        }
-    }
-
-    Item {
         id: reset
         property bool turnOn: false
         onTurnOnChanged: if(turnOn){
                              turnOn=false
                              rectangle1.color="white"
                              button1.enabled=false
-                             textInput1.text=""
                              comboBox1.focus=true
-
                          }
     }
-
-
 
     Label {
         id: lblCombo
@@ -58,7 +39,6 @@ Window {
         focus: true
     }
 
-
     ComboBox {
         id: comboBox1
         //        x: 822
@@ -70,13 +50,14 @@ Window {
         anchors.top: lblCombo.bottom
         anchors.topMargin: 5
         anchors.horizontalCenter: parent.horizontalCenter
-        model: Login.Users
+        model: LoginDlgPassword.getUserList
 
         onCurrentIndexChanged: {
             reset.turnOn=true
-            Login.setUser( comboBox1.currentIndex)
-            if(currentIndex != 0)
+            LoginDlgPassword.setUsername(comboBox1.currentIndex)
+            if (currentIndex != 0) {
                 textInput1.focus = true
+            }
         }
     }
 
@@ -123,7 +104,7 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
 
         TextInput {
-            id: textInput1
+            id: password_value
             x: 28
             y: 22
             width: 311
@@ -133,8 +114,18 @@ Window {
             anchors.horizontalCenter: parent.horizontalCenter
             echoMode: TextInput.Password
             font.pixelSize: 12
-            onTextChanged: Login.setUserPw(textInput1.text)
+            onTextChanged: LoginDlgPassword.setPassword(password_value.text)
+            Connections {
+                target: LoginDlgPassword
+                onPasswordChanged: {
+                    if (correct) {
+                        password_value.color = "green"
+                    }
+                    else {
+                        // TODO: password_value.color = defaultColor;
+                    }
+                }
+            }
         }
     }
 }
-

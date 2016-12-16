@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "login.h"
+#include "loginDlg.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    Login login;
+    LoginDlg loginDlg(nullptr);
 
-    engine.rootContext()->setContextProperty("Login",&login);
+    engine.rootContext()->setContextProperty("LoginDlgPassword",&loginDlg);
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
     return app.exec();
