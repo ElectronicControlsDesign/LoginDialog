@@ -12,6 +12,7 @@ Window {
     modality:  Qt.ApplicationModal
     flags: Qt.Dialog
 
+<<<<<<< HEAD
     Item {
         id: reset
         property bool turnOn: false
@@ -22,6 +23,35 @@ Window {
                              comboBox1.focus=true
                          }
     }
+=======
+//    Item {
+//        Connections {
+//            target: Login
+//            onPassed: {
+//                rectangle1.color="green"
+//                button1.enabled=true
+//            }
+
+//            onFailed:  {
+//                rectangle1.color="white"
+//                button1.enabled=false
+//            }
+//        }
+//    }
+
+//    Item {
+//        id: reset
+//        property bool turnOn: false
+//        onTurnOnChanged: if(turnOn){
+//                             turnOn=false
+//                             rectangle1.color="white"
+//                             button1.enabled=false
+//                             textInput1.text=""
+//                             comboBox1.focus=true
+
+//                         }
+//    }
+>>>>>>> 3ca5fd0d7c39d905d7709b08ae48e6c80b82ced2
 
     Label {
         id: lblCombo
@@ -42,15 +72,22 @@ Window {
     ComboBox {
         id: comboBox1
         //        x: 822
-        width: 330
         height: 40
+        anchors.right: parent.right
+        anchors.rightMargin: 27
+        anchors.left: parent.left
+        anchors.leftMargin: 33
         //        currentIndex: -1
         editText: ""
         editable: false
         anchors.top: lblCombo.bottom
         anchors.topMargin: 5
+<<<<<<< HEAD
         anchors.horizontalCenter: parent.horizontalCenter
         model: LoginDlgPassword.getUserList
+=======
+        model: Login.Users
+>>>>>>> 3ca5fd0d7c39d905d7709b08ae48e6c80b82ced2
 
         onCurrentIndexChanged: {
             reset.turnOn=true
@@ -95,13 +132,15 @@ Window {
     Rectangle {
         id: rectangle1
         //        x: 777
-        width: 342
         height: 64
         color: "transparent"
+        anchors.right: parent.right
+        anchors.rightMargin: 28
+        anchors.left: parent.left
+        anchors.leftMargin: 30
         border.color: "black"
         anchors.top: comboBox1.bottom
         anchors.topMargin: 35
-        anchors.horizontalCenter: parent.horizontalCenter
 
         TextInput {
             id: password_value
