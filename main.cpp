@@ -12,20 +12,28 @@ int main(int argc, char *argv[])
 
     LoginDlg loginDlg(nullptr);
 
-    const auto rootContext = engine.rootContext();
+    auto const rootContext = engine.rootContext();
     if (rootContext != nullptr)
     {
-        rootContext->setContextProperty("LoginDlgPassword",&loginDlg);
+        rootContext->setContextProperty("LoginDlgPassword", &loginDlg);
         engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
-        // Why not use QObject::connect?
-        //QObject::connect
-        //    (
-        //        loginDlgObject,
-        //        SIGNAL(signalAccepted()),
-        //        &loginDlgConnection,
-        //        SLOT(handleOnAccepted())
-        //    );
+//        auto const loginDlgObject = object->findChild<QObject*>("loginDlg");
+//        if (loginDlgObject != nullptr)
+//        {
+//            // Why not use QObject::connect?
+//            QObject::connect
+//                (
+//                    loginDlgObject,
+//                    SIGNAL(signalAccepted()),
+//                    &loginDlgConnection,
+//                    SLOT(handleOnAccepted())
+//                );
+//        }
+//        else
+//        {
+//            // LOG(Log::Severity::error, Log::Category::initialize, "Connect failed.");
+//        }
     }
     else
     {
