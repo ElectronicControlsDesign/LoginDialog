@@ -4,8 +4,8 @@ Using QML to create a simple dialog that allows a user to log into an
 application configuration utility we will create.
 
 The login dialog is fairly simple in concept and much like many other login dialogs
-you’ve likely encountered. Here are a few places it diverges from what you
-might otherwise expect. 
+you’ve likely encountered. For example, it will contain an Ok and Cancel button.
+Here are a few places it diverges from what you might otherwise expect. 
 
 The username is a drop down of pre-configured usernames read from a SQLite
 database. 
