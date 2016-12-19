@@ -5,6 +5,8 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.0
 
+
+
 Window {
     id: window1
     visible: true
@@ -30,9 +32,9 @@ Window {
                 loginDlg.visible=true
             }
         }
+        LoginDlg {
+            id: loginDlg
 
-    LoginDlg {
-        id: loginDlg
+        }
 
-    }
 }

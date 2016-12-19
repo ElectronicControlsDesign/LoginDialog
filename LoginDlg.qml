@@ -5,10 +5,12 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.0
 
+import QtQuick.Layouts 1.1
+
 Window {
     id: loginDlg
-    height: 300
-    width: 400
+    height: 150
+    width: 300
     modality:  Qt.ApplicationModal
     flags: Qt.Dialog
 
@@ -17,46 +19,41 @@ Window {
         property bool turnOn: false
         onTurnOnChanged: if(turnOn){
                              turnOn=false
-                             rectangle1.color="white"
-                             button1.enabled=false
-                             comboBox1.focus=true
+                             password_value_border.color="white"
+                             ok_button.enabled=false
+                             username_dropdown.focus=true
                          }
     }
 
     Label {
-        id: lblCombo
-        width: 84
-        height: 24
+        id: username_label
         text: qsTr("User Name")
-        anchors.left: parent.left
-        anchors.leftMargin: 30
-        anchors.top: parent.top
-        anchors.topMargin: 20
-
-        font.pointSize: 13
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
         focus: true
+        height: 30
+        horizontalAlignment: Text.AlignRight
+        verticalAlignment: Text.AlignVCenter
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+
+        anchors.leftMargin: 15
+        anchors.topMargin: 15
+
     }
 
     ComboBox {
-        id: comboBox1
-        //        x: 822
-        height: 40
-        //anchors.right: parent.right
-        anchors.rightMargin: 27
-        //anchors.left: parent.left
-        anchors.leftMargin: 33
-        //        currentIndex: -1
+        id: username_dropdown
         editText: ""
         editable: false
-        anchors.top: lblCombo.bottom
-        anchors.topMargin: 5
-        //anchors.horizontalCenter: parent.horizontalCenter
+        height: 30
+        anchors.left: username_label.right
+        anchors.leftMargin: 15
+        anchors.top: parent.top
+        anchors.topMargin: 15
         model: LoginDlgPassword.getUserList
         onCurrentIndexChanged: {
             reset.turnOn=true
-            LoginDlgPassword.setUsername(comboBox1.currentIndex)
+            LoginDlgPassword.setUsername(username_dropdown.currentIndex)
             if (currentIndex != 0) {
                 textInput1.focus = true
             }
@@ -64,60 +61,33 @@ Window {
     }
 
     Label {
-        id: label1
-        //        y: 449
-        width: 84
-        height: 24
+        id: password_label
         text: qsTr("Password")
-        anchors.left: rectangle1.left
-        anchors.leftMargin: 0
-        anchors.bottom: rectangle1.top
-        anchors.bottomMargin: 4
-        font.pointSize: 13
-        horizontalAlignment: Text.AlignHCenter
+        height: 30
+        anchors.top: username_label.bottom
+        anchors.left: parent.left
+        anchors.leftMargin: 15
+        anchors.topMargin: 15
+        horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
     }
-
-    Button {
-        id: button1
-        enabled: false
-        //        x: 923
-        width: 141
-        height: 63
-        text: qsTr("Ok")
-        anchors.top: rectangle1.bottom
-        anchors.topMargin: 25
-        anchors.horizontalCenter: parent.horizontalCenter
-        onClicked:  {
-                     reset.turnOn = true
-                    loginDlg.visible=false
-        }
-    }
-
     Rectangle {
-        id: rectangle1
-        //        x: 777
-        height: 64
+        id: password_value_border
+        width: 150
+        height: 30
         color: "transparent"
-        anchors.right: parent.right
-        anchors.rightMargin: 28
-        anchors.left: parent.left
-        anchors.leftMargin: 30
         border.color: "black"
-        anchors.top: comboBox1.bottom
-        anchors.topMargin: 35
+        anchors.left: username_dropdown.left
+        anchors.top: password_label.top
+
 
         TextInput {
             id: password_value
-            x: 28
-            y: 22
-            width: 311
-            height: 34
             text: ""
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+
+            height: parent.height
+            width: parent.width
             echoMode: TextInput.Password
-            font.pixelSize: 12
             onTextChanged: LoginDlgPassword.setPassword(password_value.text)
             Connections {
                 target: LoginDlgPassword
@@ -132,4 +102,34 @@ Window {
             }
         }
     }
+
+    Button {
+        id: cancel_button
+        enabled: true
+        anchors.bottom: parent.bottom
+        anchors.right: ok_button.left
+        anchors.rightMargin: 15
+        anchors.bottomMargin: 15
+        text: qsTr("Cancel")
+        onClicked:  {
+            loginDlg.close();
+        }
+    }
+    Button {
+        id: ok_button
+        enabled: false
+        anchors.bottom:  parent.bottom
+        anchors.right: parent.right
+        anchors.rightMargin: 15
+        anchors.bottomMargin: 15
+        text: qsTr("Ok")
+        onClicked:  {
+             reset.turnOn = true
+            loginDlg.visible=false
+        }
+    }
+
+
+
+
 }
