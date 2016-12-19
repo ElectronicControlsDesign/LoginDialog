@@ -4,8 +4,8 @@ Using QML to create a simple dialog that allows a user to log into an
 application configuration utility we will create.
 
 The login dialog is fairly simple in concept and much like many other login dialogs
-you’ve likely encountered. Here are a few places it diverges from what you
-might otherwise expect. 
+you’ve likely encountered. For example, it will contain an Ok and Cancel button.
+Here are a few places it diverges from what you might otherwise expect. 
 
 The username is a drop down of pre-configured usernames read from a SQLite
 database. 
@@ -23,7 +23,7 @@ contain UTF-8 strings. Username and password values will also contain UTF-8 stri
 Since languages may translate into longer and shorter text for "Username" and "Password", the 
 dialog must adjust for this. Right justify labels to account for this difference. 
 
-The dialog is fixed in size at runtime but must display on a wide range of display sizes. 
+The dialog must display on a wide range of display sizes. 
 
 The dialog will be reused in multiple applications. To help with this, modularizing the dialog is important. 
 Lack of modularity will carefully scrutinized. 
