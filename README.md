@@ -23,7 +23,7 @@ contain UTF-8 strings. Username and password values will also contain UTF-8 stri
 Since languages may translate into longer and shorter text for "Username" and "Password", the 
 dialog must adjust for this. Right justify labels to account for this difference. 
 
-The dialog is fixed in size at runtime but must display on a wide range of display sizes. 
+The dialog must display on a wide range of display sizes. 
 
 The dialog will be reused in multiple applications. To help with this, modularizing the dialog is important. 
 Lack of modularity will carefully scrutinized. 
