@@ -5,8 +5,6 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.0
 
-import QtQuick.Layouts 1.1
-
 Window {
     id: loginDlg
     height: 150
@@ -27,7 +25,7 @@ Window {
 
     Label {
         id: username_label
-        text: qsTr("User Name")
+        text: "Username" // TODO: Get from i18n
         focus: true
         height: 30
         horizontalAlignment: Text.AlignRight
@@ -62,7 +60,7 @@ Window {
 
     Label {
         id: password_label
-        text: qsTr("Password")
+        text: "Password" // TODO: Get from i18n
         height: 30
         anchors.top: username_label.bottom
         anchors.left: parent.left
@@ -110,7 +108,7 @@ Window {
         anchors.right: ok_button.left
         anchors.rightMargin: 15
         anchors.bottomMargin: 15
-        text: qsTr("Cancel")
+        text: "Cancel" // TODO: Get from i18n
         onClicked:  {
             loginDlg.close();
         }
@@ -122,14 +120,10 @@ Window {
         anchors.right: parent.right
         anchors.rightMargin: 15
         anchors.bottomMargin: 15
-        text: qsTr("Ok")
+        text: "Ok" // TODO: Get from i18n
         onClicked:  {
              reset.turnOn = true
             loginDlg.visible=false
         }
     }
-
-
-
-
 }
