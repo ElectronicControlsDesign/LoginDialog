@@ -12,7 +12,6 @@ Window {
     modality:  Qt.ApplicationModal
     flags: Qt.Dialog
 
-<<<<<<< HEAD
     Item {
         id: reset
         property bool turnOn: false
@@ -23,35 +22,6 @@ Window {
                              comboBox1.focus=true
                          }
     }
-=======
-//    Item {
-//        Connections {
-//            target: Login
-//            onPassed: {
-//                rectangle1.color="green"
-//                button1.enabled=true
-//            }
-
-//            onFailed:  {
-//                rectangle1.color="white"
-//                button1.enabled=false
-//            }
-//        }
-//    }
-
-//    Item {
-//        id: reset
-//        property bool turnOn: false
-//        onTurnOnChanged: if(turnOn){
-//                             turnOn=false
-//                             rectangle1.color="white"
-//                             button1.enabled=false
-//                             textInput1.text=""
-//                             comboBox1.focus=true
-
-//                         }
-//    }
->>>>>>> 3ca5fd0d7c39d905d7709b08ae48e6c80b82ced2
 
     Label {
         id: lblCombo
@@ -73,22 +43,17 @@ Window {
         id: comboBox1
         //        x: 822
         height: 40
-        anchors.right: parent.right
+        //anchors.right: parent.right
         anchors.rightMargin: 27
-        anchors.left: parent.left
+        //anchors.left: parent.left
         anchors.leftMargin: 33
         //        currentIndex: -1
         editText: ""
         editable: false
         anchors.top: lblCombo.bottom
         anchors.topMargin: 5
-<<<<<<< HEAD
-        anchors.horizontalCenter: parent.horizontalCenter
+        //anchors.horizontalCenter: parent.horizontalCenter
         model: LoginDlgPassword.getUserList
-=======
-        model: Login.Users
->>>>>>> 3ca5fd0d7c39d905d7709b08ae48e6c80b82ced2
-
         onCurrentIndexChanged: {
             reset.turnOn=true
             LoginDlgPassword.setUsername(comboBox1.currentIndex)
@@ -161,7 +126,7 @@ Window {
                         password_value.color = "green"
                     }
                     else {
-                        // TODO: password_value.color = defaultColor;
+                        // TODO: password_value.color = defaultColor; // http://doc.qt.io/qt-5/qml-qtquick-systempalette.html
                     }
                 }
             }
