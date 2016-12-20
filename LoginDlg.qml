@@ -9,127 +9,133 @@ import QtQuick.Layouts 1.1
 
 Window {
     id: loginDlg
+    width: 226
     height: 150
-    width: 300
+    visible: true
     modality:  Qt.ApplicationModal
     flags: Qt.Dialog
+
 
     Item {
         id: reset
         property bool turnOn: false
         onTurnOnChanged: if(turnOn){
                              turnOn=false
-                             password_value_border.color="white"
-                             ok_button.enabled=false
+                             //password_value_border.color="white"
+                             //ok_button.enabled=false
                              username_dropdown.focus=true
                          }
     }
-
-    Label {
-        id: username_label
-        text: qsTr("User Name")
-        focus: true
-        height: 30
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-
+    Item {
+        id: loginForm_wrapper
         anchors.top: parent.top
-        anchors.left: parent.left
-
-        anchors.leftMargin: 15
+        anchors.bottom: parent.bottom
         anchors.topMargin: 15
+        anchors.bottomMargin: 15
 
-    }
 
-    ComboBox {
-        id: username_dropdown
-        editText: ""
-        editable: false
-        height: 30
-        anchors.left: username_label.right
-        anchors.leftMargin: 15
-        anchors.top: parent.top
-        anchors.topMargin: 15
-        model: LoginDlgPassword.getUserList
-        onCurrentIndexChanged: {
-            reset.turnOn=true
-            LoginDlgPassword.setUsername(username_dropdown.currentIndex)
-            if (currentIndex != 0) {
-                textInput1.focus = true
+        GridLayout {
+            id: loginForm_grid
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            columns: 2
+
+            Label {
+                id: username_label
+                text: "Username" // TODO: Get from i18n
+                focus: true
+                height: 30
+                Layout.fillWidth: true
+                horizontalAlignment: Qt.AlignRight
+                verticalAlignment: Qt.AlignVCenter
             }
-        }
-    }
-
-    Label {
-        id: password_label
-        text: qsTr("Password")
-        height: 30
-        anchors.top: username_label.bottom
-        anchors.left: parent.left
-        anchors.leftMargin: 15
-        anchors.topMargin: 15
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-    }
-    Rectangle {
-        id: password_value_border
-        width: 150
-        height: 30
-        color: "transparent"
-        border.color: "black"
-        anchors.left: username_dropdown.left
-        anchors.top: password_label.top
-
-
-        TextInput {
-            id: password_value
-            text: ""
-
-            height: parent.height
-            width: parent.width
-            echoMode: TextInput.Password
-            onTextChanged: LoginDlgPassword.setPassword(password_value.text)
-            Connections {
-                target: LoginDlgPassword
-                onPasswordChanged: {
-                    if (correct) {
-                        password_value.color = "green"
+            ComboBox {
+                id: username_dropdown
+                editText: ""
+                editable: false
+                height: 30
+                Layout.fillWidth: true
+                model: LoginDlgPassword.getUserList
+                onCurrentIndexChanged: {
+                    reset.turnOn=true
+                    LoginDlgPassword.setUsername(username_dropdown.currentIndex)
+                    if (currentIndex != 0) {
+                        textInput1.focus = true
                     }
-                    else {
-                        // TODO: password_value.color = defaultColor; // http://doc.qt.io/qt-5/qml-qtquick-systempalette.html
+                }
+            }
+            Label {
+                id: password_label
+                text: "Password" // TODO: Get from i18n
+                height: 30
+                Layout.fillWidth: true
+                horizontalAlignment: Qt.AlignRight
+                verticalAlignment: Qt.AlignVCenter
+            }
+            Rectangle {
+                id: password_value_border
+                width: 150
+                height: 30
+                color: "transparent"
+                border.color: "black"
+                TextInput {
+                    id: password_value
+                    text: ""
+                    height: parent.height
+                    width: parent.width
+                    echoMode: TextInput.Password
+                    onTextChanged: LoginDlgPassword.setPassword(password_value.text)
+                    Connections {
+                        target: LoginDlgPassword
+                        onPasswordChanged: {
+                            if (correct) {
+                                password_value.color = "green"
+                            }
+                            else {
+                                // TODO: password_value.color = defaultColor; // http://doc.qt.io/qt-5/qml-qtquick-systempalette.html
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-
-    Button {
-        id: cancel_button
-        enabled: true
-        anchors.bottom: parent.bottom
-        anchors.right: ok_button.left
-        anchors.rightMargin: 15
-        anchors.bottomMargin: 15
-        text: qsTr("Cancel")
-        onClicked:  {
-            loginDlg.close();
+        Button {
+            id: test_button
+            enabled: true
+            text: "Translate" // TODO: Get from i18n
+            anchors.bottom: cancel_button.bottom
+            anchors.right: cancel_button.left
+            anchors.rightMargin: 15
+            // TODO: Dialog size needs to adjust to size of the label
+            onClicked:  {
+                username_label.text = "aljbndjabsdjkasdkjba askdjnakjsdbkasbd"
+                password_label.text = "aljbndjabsdjkasdkjba askdjnakjsdbkasbd asdasda"
+            }
         }
-    }
-    Button {
-        id: ok_button
-        enabled: false
-        anchors.bottom:  parent.bottom
-        anchors.right: parent.right
-        anchors.rightMargin: 15
-        anchors.bottomMargin: 15
-        text: qsTr("Ok")
-        onClicked:  {
-             reset.turnOn = true
-            loginDlg.visible=false
+        Button {
+            id: cancel_button
+            enabled: true
+            text: "Cancel" // TODO: Get from i18n
+            anchors.bottom: ok_button.bottom
+            anchors.right: ok_button.left
+            anchors.rightMargin: 15
+            onClicked:  {
+                loginDlg.close();
+            }
         }
-    }
+        Button {
+            id: ok_button
+            enabled: false
+            text: "Ok" // TODO: Get from i18n
+            anchors.right: loginForm_grid.right
+            anchors.top: loginForm_grid.bottom
+            anchors.topMargin: 15
+            anchors.rightMargin: 15
 
-
-
-
+            onClicked:  {
+                 reset.turnOn = true
+                loginDlg.visible=false
+            }
+        }
+     }
 }
