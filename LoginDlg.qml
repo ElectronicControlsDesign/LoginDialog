@@ -7,10 +7,40 @@ import QtGraphicalEffects 1.0
 
 Window {
     id: loginDlg
+    property alias lblusername: username_label.text
+    property alias lblpassword: password_label.text
+    property alias lblcancelbtn: cancel_button.text
+    property alias lblokbtn: ok_button.text
+
     height: 150
     width: 300
+    maximumHeight: height
+    maximumWidth: width
+    minimumHeight: height
+    minimumWidth: width
+
     modality:  Qt.ApplicationModal
     flags: Qt.Dialog
+
+    function resize(){
+        var userline = username_label.width + username_dropdown.width
+        var passline = password_label.width + password_value_border.width
+
+        var okcan =   cancel_button.text.length + ok_button.text.length
+
+        if(loginDlg.width < ( userline + 100)){
+            if(userline > passline)
+                loginDlg.width = userline + 50
+            else
+                loginDlg.width = passline + 50
+
+        }
+        if(loginDlg.width < okcan + 30){
+            loginDlg.width = okcan + 100
+        }
+
+
+    }
 
     Item {
         id: reset
@@ -25,7 +55,7 @@ Window {
 
     Label {
         id: username_label
-        text: "Username" // TODO: Get from i18n
+        text: "Username Extremely Very Long" // TODO: Get from i18n
         focus: true
         height: 30
         horizontalAlignment: Text.AlignRight
@@ -60,7 +90,7 @@ Window {
 
     Label {
         id: password_label
-        text: "Password" // TODO: Get from i18n
+        text: "Password Extremely Very Long" // TODO: Get from i18n
         height: 30
         anchors.top: username_label.bottom
         anchors.left: parent.left
@@ -120,7 +150,7 @@ Window {
         anchors.right: parent.right
         anchors.rightMargin: 15
         anchors.bottomMargin: 15
-        text: "Ok" // TODO: Get from i18n
+        text: "Ok Extremely Very Long" // TODO: Get from i18n
         onClicked:  {
              reset.turnOn = true
             loginDlg.visible=false
