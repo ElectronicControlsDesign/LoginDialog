@@ -5,42 +5,25 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.0
 
+import QtQuick.Layouts 1.1
+
 Window {
     id: loginDlg
-    property alias lblusername: username_label.text
-    property alias lblpassword: password_label.text
-    property alias lblcancelbtn: cancel_button.text
-    property alias lblokbtn: ok_button.text
+//    height: 150
+//    width: 300
+//    maximumHeight: height
+//    maximumWidth: width
+//    minimumHeight: height
+//    minimumWidth: width
 
-    height: 150
-    width: 300
-    maximumHeight: height
-    maximumWidth: width
-    minimumHeight: height
-    minimumWidth: width
+    property var textInputIndent : 10
+    property var layoutMargin : 15
 
+    width: loginForm_grid.width
     modality:  Qt.ApplicationModal
     flags: Qt.Dialog
 
-    function resize(){
-        var userline = username_label.width + username_dropdown.width
-        var passline = password_label.width + password_value_border.width
-
-        var okcan =   cancel_button.text.length + ok_button.text.length
-
-        if(loginDlg.width < ( userline + 100)){
-            if(userline > passline)
-                loginDlg.width = userline + 50
-            else
-                loginDlg.width = passline + 50
-
-        }
-        if(loginDlg.width < okcan + 30){
-            loginDlg.width = okcan + 100
-        }
-
-
-    }
+    SystemPalette { id: system_pallet; colorGroup: SystemPalette.Active }
 
     Item {
         id: reset
@@ -53,107 +36,122 @@ Window {
                          }
     }
 
-    Label {
-        id: username_label
-        text: "Username Extremely Very Long" // TODO: Get from i18n
-        focus: true
-        height: 30
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
+            GridLayout {
+                id: loginForm_grid
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                columns: 2
 
-        anchors.top: parent.top
-        anchors.left: parent.left
-
-        anchors.leftMargin: 15
-        anchors.topMargin: 15
-
-    }
-
-    ComboBox {
-        id: username_dropdown
-        editText: ""
-        editable: false
-        height: 30
-        anchors.left: username_label.right
-        anchors.leftMargin: 15
-        anchors.top: parent.top
-        anchors.topMargin: 15
-        model: LoginDlgPassword.getUserList
-        onCurrentIndexChanged: {
-            reset.turnOn=true
-            LoginDlgPassword.setUsername(username_dropdown.currentIndex)
-            if (currentIndex != 0) {
-                textInput1.focus = true
-            }
-        }
-    }
-
-    Label {
-        id: password_label
-        text: "Password Extremely Very Long" // TODO: Get from i18n
-        height: 30
-        anchors.top: username_label.bottom
-        anchors.left: parent.left
-        anchors.leftMargin: 15
-        anchors.topMargin: 15
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-    }
-    Rectangle {
-        id: password_value_border
-        width: 150
-        height: 30
-        color: "transparent"
-        border.color: "black"
-        anchors.left: username_dropdown.left
-        anchors.top: password_label.top
-
-
-        TextInput {
-            id: password_value
-            text: ""
-
-            height: parent.height
-            width: parent.width
-            echoMode: TextInput.Password
-            onTextChanged: LoginDlgPassword.setPassword(password_value.text)
-            Connections {
-                target: LoginDlgPassword
-                onPasswordChanged: {
-                    if (correct) {
-                        password_value.color = "green"
-                    }
-                    else {
-                        // TODO: password_value.color = defaultColor; // http://doc.qt.io/qt-5/qml-qtquick-systempalette.html
+                Label {
+                    id: username_label
+                    text: "Username" // TODO: Get from i18n
+                    focus: true
+                    height: 30
+                    Layout.topMargin: layoutMargin
+                    Layout.leftMargin: layoutMargin
+                    Layout.fillWidth: true
+                    verticalAlignment: Text.AlignVCenter
+                    // TODO: Align right label
+                }
+                ComboBox {
+                    id: username_dropdown
+                    editText: ""
+                    editable: false
+                    height: 30
+                    Layout.topMargin: layoutMargin
+                    Layout.rightMargin: layoutMargin
+                    Layout.fillWidth: true
+                    model: LoginDlgPassword.getUserList
+                    onCurrentIndexChanged: {
+                        reset.turnOn=true
+                        LoginDlgPassword.setUsername(username_dropdown.currentIndex)
+                        if (currentIndex != 0) {
+                            textInput1.focus = true
+                        }
                     }
                 }
-            }
-        }
-    }
+                Label {
+                    id: password_label
+                    text: "Password" // TODO: Get from i18n
+                    height: 30
+                    Layout.fillWidth: true
+                    Layout.topMargin: layoutMargin
+                    Layout.leftMargin: layoutMargin
+                    verticalAlignment: Text.AlignVCenter
+                    // TODO: Align right label
+                }
+                Rectangle {
+                    id: password_value_border
+                    width: 150
+                    height: 30
+                    color: "transparent"
+                    border.color: "black"
+                    Layout.topMargin: layoutMargin / 2
+                    Layout.rightMargin: layoutMargin
+                    TextInput {
+                        id: password_value
+                        text: ""
+                        height: parent.height
+                        width: password_value_border.width
+                        cursorVisible: false
+                        anchors.left: parent.left
+                        anchors.leftMargin: textInputIndent
+                        verticalAlignment: Text.AlignVCenter
+                        echoMode: TextInput.Password
+                        onTextChanged: LoginDlgPassword.setPassword(password_value.text)
+                        Connections {
+                            target: LoginDlgPassword
+                            onPasswordChanged: {
+                                if (correct) {
+                                    password_value.color = "green"
+                                }
+                                else {
+                                    // TODO: password_value.color = defaultColor; // http://doc.qt.io/qt-5/qml-qtquick-systempalette.html
+                                    password_value.color = system_pallet.text
+                                }
+                            }
+                        }
+                    }
+                }
+                Button {
+                    id: test_button
+                    enabled: true
+                    text: "Translate" // TODO: Get from i18n
+                    anchors.bottom: cancel_button.bottom
+                    anchors.right: cancel_button.left
+                    anchors.rightMargin: 15
+                    // TODO: Dialog size needs to adjust to size of the label
+                    onClicked:  {
+                        //password_label.horizontalAlignment = 10
+                        username_label.text = "I am the translated username label"
+                        password_label.text = "I am the translated password label with a larger width"
+                    }
+                }
+                Button {
+                    id: cancel_button
+                    enabled: true
+                    text: "Cancel" // TODO: Get from i18n
+                    anchors.bottom: ok_button.bottom
+                    anchors.right: ok_button.left
+                    anchors.rightMargin: 15
+                    onClicked:  {
+                        loginDlg.close();
+                    }
+                }
+                Button {
+                    id: ok_button
+                    enabled: false
+                    text: "Ok" // TODO: Get from i18n
+                    anchors.right: password_value_border.right
+                    anchors.top: password_value_border.bottom
+                    anchors.topMargin: layoutMargin
 
-    Button {
-        id: cancel_button
-        enabled: true
-        anchors.bottom: parent.bottom
-        anchors.right: ok_button.left
-        anchors.rightMargin: 15
-        anchors.bottomMargin: 15
-        text: "Cancel" // TODO: Get from i18n
-        onClicked:  {
-            loginDlg.close();
-        }
-    }
-    Button {
-        id: ok_button
-        enabled: false
-        anchors.bottom:  parent.bottom
-        anchors.right: parent.right
-        anchors.rightMargin: 15
-        anchors.bottomMargin: 15
-        text: "Ok Extremely Very Long" // TODO: Get from i18n
-        onClicked:  {
-             reset.turnOn = true
-            loginDlg.visible=false
-        }
-    }
+
+                    onClicked:  {
+                         reset.turnOn = true
+                        loginDlg.visible=false
+                    }
+                }
+
+            }
 }
