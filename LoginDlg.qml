@@ -9,14 +9,21 @@ import QtQuick.Layouts 1.1
 
 Window {
     id: loginDlg
-    height: 150
-    width: loginForm_wrapper.width + 30 // TODO: How can I specify width of the loginForm_wrapper with it's margins
-    visible: true
+//    height: 150
+//    width: 300
+//    maximumHeight: height
+//    maximumWidth: width
+//    minimumHeight: height
+//    minimumWidth: width
+
+    property var textInputIndent : 10
+    property var layoutMargin : 15
+
+    width: loginForm_grid.width
     modality:  Qt.ApplicationModal
     flags: Qt.Dialog
 
     SystemPalette { id: system_pallet; colorGroup: SystemPalette.Active }
-
 
     Item {
         id: reset
@@ -28,28 +35,12 @@ Window {
                              username_dropdown.focus=true
                          }
     }
-    Item {
-        id: loginForm_wrapper
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.topMargin: 15
-        anchors.bottomMargin: 15
-        width: childrenRect.width
-        anchors.right: loginDlg.right
-        anchors.rightMargin: 15
 
-        Rectangle {
-            id: testWrapper
-            anchors.left: parent.left
-            anchors.leftMargin: 15
-            anchors.rightMargin: 15
-            width: childrenRect.width
 
             GridLayout {
                 id: loginForm_grid
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.leftMargin: 50
                 columns: 2
 
                 Label {
@@ -57,6 +48,8 @@ Window {
                     text: "Username" // TODO: Get from i18n
                     focus: true
                     height: 30
+                    Layout.topMargin: layoutMargin
+                    Layout.leftMargin: layoutMargin
                     Layout.fillWidth: true
                     verticalAlignment: Text.AlignVCenter
                     // TODO: Align right label
@@ -66,6 +59,8 @@ Window {
                     editText: ""
                     editable: false
                     height: 30
+                    Layout.topMargin: layoutMargin
+                    Layout.rightMargin: layoutMargin
                     Layout.fillWidth: true
                     model: LoginDlgPassword.getUserList
                     onCurrentIndexChanged: {
@@ -81,6 +76,8 @@ Window {
                     text: "Password" // TODO: Get from i18n
                     height: 30
                     Layout.fillWidth: true
+                    Layout.topMargin: layoutMargin
+                    Layout.leftMargin: layoutMargin
                     verticalAlignment: Text.AlignVCenter
                     // TODO: Align right label
                 }
@@ -90,12 +87,16 @@ Window {
                     height: 30
                     color: "transparent"
                     border.color: "black"
+                    Layout.topMargin: layoutMargin / 2
+                    Layout.rightMargin: layoutMargin
                     TextInput {
                         id: password_value
                         text: ""
                         height: parent.height
                         width: password_value_border.width
                         cursorVisible: false
+                        anchors.left: parent.left
+                        anchors.leftMargin: textInputIndent
                         verticalAlignment: Text.AlignVCenter
                         echoMode: TextInput.Password
                         onTextChanged: LoginDlgPassword.setPassword(password_value.text)
@@ -113,46 +114,47 @@ Window {
                         }
                     }
                 }
-            }
-            Button {
-                id: test_button
-                enabled: true
-                text: "Translate" // TODO: Get from i18n
-                anchors.bottom: cancel_button.bottom
-                anchors.right: cancel_button.left
-                anchors.rightMargin: 15
-                // TODO: Dialog size needs to adjust to size of the label
-                onClicked:  {
-                    //password_label.horizontalAlignment = 10
-                    username_label.text = "aljbndjabsdjkasdkjba askdjnakjsdbkasbd"
-                    password_label.text = "aljbndjabsdjkasdkjba askdjnakjsdbkasbd asdasda aljbndjabsdjkasdkjba askdjnakjsdbkasbd"
+                Button {
+                    id: test_button
+                    enabled: true
+                    text: "Translate" // TODO: Get from i18n
+                    anchors.bottom: cancel_button.bottom
+                    anchors.right: cancel_button.left
+                    anchors.rightMargin: 15
+                    // TODO: Dialog size needs to adjust to size of the label
+                    onClicked:  {
+                        //password_label.horizontalAlignment = 10
+                        username_label.text = "I am the translated username label"
+                        password_label.text = "I am the translated password label with a larger width"
+                    }
                 }
-            }
-            Button {
-                id: cancel_button
-                enabled: true
-                text: "Cancel" // TODO: Get from i18n
-                anchors.bottom: ok_button.bottom
-                anchors.right: ok_button.left
-                anchors.rightMargin: 15
-                onClicked:  {
-                    loginDlg.close();
+                Button {
+                    id: cancel_button
+                    enabled: true
+                    text: "Cancel" // TODO: Get from i18n
+                    anchors.bottom: ok_button.bottom
+                    anchors.right: ok_button.left
+                    anchors.rightMargin: 15
+                    onClicked:  {
+                        loginDlg.close();
+                    }
                 }
-            }
-            Button {
-                id: ok_button
-                enabled: false
-                text: "Ok" // TODO: Get from i18n
-                anchors.right: loginForm_grid.right
-                anchors.top: loginForm_grid.bottom
-                anchors.topMargin: 15
-                anchors.rightMargin: 15
+                Button {
+                    id: ok_button
+                    enabled: false
+                    text: "Ok" // TODO: Get from i18n
+                    anchors.right: password_value_border.right
+                    anchors.top: password_value_border.bottom
+                    anchors.topMargin: layoutMargin
 
-                onClicked:  {
-                     reset.turnOn = true
-                    loginDlg.visible=false
+
+                    onClicked:  {
+                         reset.turnOn = true
+                        loginDlg.visible=false
+                    }
                 }
+
             }
-        }
-     }
+
+
 }
