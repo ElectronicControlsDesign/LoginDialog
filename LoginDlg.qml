@@ -25,6 +25,8 @@ Window {
 
     SystemPalette { id: system_pallet; colorGroup: SystemPalette.Active }
 
+
+
     Item {
         id: reset
         property bool turnOn: false
@@ -36,6 +38,11 @@ Window {
                          }
     }
 
+//    Item {
+//        Connections {
+//            target: LoginDlgPassword
+//        }
+//    }
             GridLayout {
                 id: loginForm_grid
                 Layout.fillWidth: true
@@ -104,6 +111,7 @@ Window {
                             onPasswordChanged: {
                                 if (correct) {
                                     password_value.color = "green"
+                                    ok_button.enabled=true
                                 }
                                 else {
                                     // TODO: password_value.color = defaultColor; // http://doc.qt.io/qt-5/qml-qtquick-systempalette.html

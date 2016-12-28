@@ -27,7 +27,7 @@ private:
 public:
     explicit LoginDlg(QObject* const parent);
 
-    Q_PROPERTY(QStringList users READ getUserList); // TODO: private: ?
+    Q_PROPERTY(QStringList users READ getUserList) // TODO: private:  Can be private. Q_PROPERTY doesn't terminate with a ;
 
     QStringList getUserList() const; // TODO: private: ?
 
