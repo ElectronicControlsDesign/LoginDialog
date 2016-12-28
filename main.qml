@@ -24,9 +24,13 @@ Window {
             anchors.left: parent.left
             anchors.leftMargin: 30
             onClicked: {
-//                if ((LoginDlgPassword.userWidth() > 50) || (LoginDlgPassword.pwWidth() > 50)) { // You need to set this based on real vales
-//                    loginDlg.width = 600 // set it based on the actual above returned values + margins
-//                }
+                // Pass tranlation labels here
+                // I currently have default values in the loginDlg to long crazy prompts for demo
+//                loginDlg.lblcancelbtn = "Cancel"
+//                loginDlg.lblokbtn = "OK"
+//                loginDlg.lblusername="Username"
+//                loginDlg.lblpassword="Password"
+                loginDlg.resize()
                 loginDlg.visible=true
             }
         }

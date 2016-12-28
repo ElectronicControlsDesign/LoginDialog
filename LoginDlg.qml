@@ -36,7 +36,6 @@ Window {
                          }
     }
 
-
             GridLayout {
                 id: loginForm_grid
                 Layout.fillWidth: true
@@ -155,6 +154,4 @@ Window {
                 }
 
             }
-
-
 }
