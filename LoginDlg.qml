@@ -16,8 +16,8 @@ Window {
 //    minimumHeight: height
 //    minimumWidth: width
 
-    property var textInputIndent : 10
-    property var layoutMargin : 15
+    property int textInputIndent : 10
+    property int layoutMargin : 15
 
     width: loginForm_grid.width
     modality:  Qt.ApplicationModal
