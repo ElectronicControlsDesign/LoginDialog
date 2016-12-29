@@ -30,7 +30,7 @@ Window {
 //                loginDlg.lblokbtn = "OK"
 //                loginDlg.lblusername="Username"
 //                loginDlg.lblpassword="Password"
-                loginDlg.resize()
+//                loginDlg.resize()
                 loginDlg.visible=true
             }
         }

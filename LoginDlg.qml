@@ -25,8 +25,6 @@ Window {
 
     SystemPalette { id: system_pallet; colorGroup: SystemPalette.Active }
 
-
-
     Item {
         id: reset
         property bool turnOn: false
@@ -51,14 +49,14 @@ Window {
 
                 Label {
                     id: username_label
-                    text: "Username" // TODO: Get from i18n
+                    text: "Username Test" // TODO: Get from i18n
                     focus: true
                     height: 30
                     Layout.topMargin: layoutMargin
                     Layout.leftMargin: layoutMargin
                     Layout.fillWidth: true
                     verticalAlignment: Text.AlignVCenter
-                    // TODO: Align right label
+                    horizontalAlignment: Text.AlignRight
                 }
                 ComboBox {
                     id: username_dropdown
@@ -85,7 +83,7 @@ Window {
                     Layout.topMargin: layoutMargin
                     Layout.leftMargin: layoutMargin
                     verticalAlignment: Text.AlignVCenter
-                    // TODO: Align right label
+                    horizontalAlignment: Text.AlignRight
                 }
                 Rectangle {
                     id: password_value_border
@@ -124,7 +122,7 @@ Window {
                 Button {
                     id: test_button
                     enabled: true
-                    text: "Translate" // TODO: Get from i18n
+                    text: "Test Translate" // TODO: Get from i18n
                     anchors.bottom: cancel_button.bottom
                     anchors.right: cancel_button.left
                     anchors.rightMargin: 15
