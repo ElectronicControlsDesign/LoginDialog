@@ -9,17 +9,18 @@ import QtQuick.Layouts 1.1
 
 Window {
     id: loginDlg
-//    height: 150
-//    width: 300
-//    maximumHeight: height
-//    maximumWidth: width
-//    minimumHeight: height
-//    minimumWidth: width
+    height: 150
 
     property int textInputIndent : 10
     property int layoutMargin : 15
 
     width: loginForm_grid.width
+
+    maximumHeight: height
+    maximumWidth: width
+    minimumHeight: height
+    minimumWidth: width
+
     modality:  Qt.ApplicationModal
     flags: Qt.Dialog
 
@@ -36,11 +37,6 @@ Window {
                          }
     }
 
-//    Item {
-//        Connections {
-//            target: LoginDlgPassword
-//        }
-//    }
             GridLayout {
                 id: loginForm_grid
                 Layout.fillWidth: true
@@ -131,6 +127,11 @@ Window {
                         //password_label.horizontalAlignment = 10
                         username_label.text = "I am the translated username label"
                         password_label.text = "I am the translated password label with a larger width"
+                        loginDlg.maximumWidth = loginForm_grid.width
+                        loginDlg.minimumWidth = loginForm_grid.width
+                        loginDlg.height = loginForm_grid.height
+                        loginDlg.maximumHeight = loginForm_grid.height
+                        loginDlg.minimumHeight = loginForm_grid.height
                     }
                 }
                 Button {
