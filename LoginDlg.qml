@@ -9,19 +9,18 @@ import QtQuick.Layouts 1.1
 
 Window {
     id: loginDlg
-//    height: 150
-//    width: 300
-//    maximumHeight: height
-//    maximumWidth: width
-//    minimumHeight: height
-//    minimumWidth: width
+    height: 150
+    maximumHeight: height
+    minimumHeight: height
 
     property int textInputIndent : 10
     property int layoutMargin : 15
 
     width: loginForm_grid.width
+    maximumWidth: width
+    minimumWidth: width
     modality:  Qt.ApplicationModal
-    flags: Qt.Dialog
+    flags: Qt.MSWindowsFixedSizeDialogHint //Qt.Dialog
 
     SystemPalette { id: system_pallet; colorGroup: SystemPalette.Active }
 
@@ -66,7 +65,7 @@ Window {
                     Layout.topMargin: layoutMargin
                     Layout.rightMargin: layoutMargin
                     Layout.fillWidth: true
-                    model: LoginDlgPassword.getUserList
+                    model: LoginDlgPassword.getUserList()
                     onCurrentIndexChanged: {
                         reset.turnOn=true
                         LoginDlgPassword.setUsername(username_dropdown.currentIndex)
@@ -129,8 +128,15 @@ Window {
                     // TODO: Dialog size needs to adjust to size of the label
                     onClicked:  {
                         //password_label.horizontalAlignment = 10
+                        username_label.horizontalAlignment = Text.AlignLeft
+                        password_label.horizontalAlignment = Text.AlignLeft
                         username_label.text = "I am the translated username label"
                         password_label.text = "I am the translated password label with a larger width"
+                        username_label.horizontalAlignment = Text.AlignRight
+                        password_label.horizontalAlignment = Text.AlignRight
+                        loginDlg.maximumWidth = loginForm_grid.width
+                        loginDlg.minimumWidth = loginForm_grid.width
+                        loginDlg.width = loginForm_grid.width
                     }
                 }
                 Button {

@@ -29,7 +29,7 @@ public:
 
     Q_PROPERTY(QStringList users READ getUserList) // TODO: private:  Can be private. Q_PROPERTY doesn't terminate with a ;
 
-    QStringList getUserList() const; // TODO: private: ?
+    Q_INVOKABLE QStringList getUserList() const; // TODO: private: ?
 
 private:
     void setPasswordChanged(const bool correct);
