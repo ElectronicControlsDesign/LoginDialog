@@ -13,12 +13,9 @@ QStringList LoginDlg::getUserList() const
 
     const QString user;
 
-    user.fromStdWString(userList_[0]); // TODO: Is there an easier way to load the QStringList?
-    result.append(user);
-    user.fromStdWString(userList_[1]);
-    result.append(user);
-    user.fromStdWString(userList_[2]);
-    result.append(user);
+    for(int x=0; x<3;x++){
+        result.append(user.fromStdWString(userList_[x]));
+    }
 
     return result;
 }
@@ -48,6 +45,6 @@ void LoginDlg::setPassword(const QString& password)
         const tstring stubPassword = L"password";
         const bool correct = (passwordGuess.compare(stubPassword)==0);
         password_ = passwordGuess;
-        setPasswordChanged(correct);
+        emit setPasswordChanged(correct);
     }
 }

@@ -32,14 +32,14 @@ public:
     Q_INVOKABLE QStringList getUserList() const; // TODO: private: ?
 
 private:
-    void setPasswordChanged(const bool correct);
+    Q_INVOKABLE void setPasswordChanged(const bool correct);
 
 signals:
     void passwordChanged(const bool correct);
 
 public slots:
-    void setPassword(const QString& password);
-    void setUsername(const int index);
+    Q_INVOKABLE void setPassword(const QString& password);
+    Q_INVOKABLE void setUsername(const int index);
 };
 
 #endif // LOGINDLG_H
