@@ -45,6 +45,6 @@ void LoginDlg::setPassword(const QString& password)
         const tstring stubPassword = L"password";
         const bool correct = (passwordGuess.compare(stubPassword)==0);
         password_ = passwordGuess;
-        emit setPasswordChanged(correct);
+        emit setPasswordChanged(correct);           // you need the keyword "emit" to send a signal
     }
 }
