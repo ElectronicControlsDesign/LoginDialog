@@ -98,6 +98,7 @@ Window {
                         text: ""
                         height: parent.height
                         width: password_value_border.width
+                        maximumLength: 19
                         cursorVisible: false
                         anchors.left: parent.left
                         anchors.leftMargin: textInputIndent
