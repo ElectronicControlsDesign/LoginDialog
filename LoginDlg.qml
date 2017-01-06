@@ -20,7 +20,8 @@ Window {
     maximumWidth: width
     minimumWidth: width
     modality:  Qt.ApplicationModal
-    flags: Qt.MSWindowsFixedSizeDialogHint //Qt.Dialog
+    flags:  (Qt.Dialog  | Qt.WindowTitleHint | Qt.WindowCloseButtonHint)
+
 
     SystemPalette { id: system_pallet; colorGroup: SystemPalette.Active }
 
