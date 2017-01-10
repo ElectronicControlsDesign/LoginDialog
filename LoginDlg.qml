@@ -97,20 +97,25 @@ Window {
                         id: password_value
                         text: ""
                         height: parent.height
-                        width: password_value_border.width
-                        maximumLength: 19
+                        width: (password_value_border.width - 5)
+//                        maximumLength: 29
+                        wrapMode: TextInput.Wrap
                         cursorVisible: false
                         anchors.left: parent.left
                         anchors.leftMargin: textInputIndent
                         verticalAlignment: Text.AlignVCenter
                         echoMode: TextInput.Password
-                        onTextChanged: LoginDlgPassword.setPassword(password_value.text)
+                        onTextChanged: { LoginDlgPassword.setPassword(password_value.text)
+                            if(password_value.text != "")
+                                ok_button.enabled=true
+                            else
+                                ok_button.enabled=false
+                        }
                         Connections {
                             target: LoginDlgPassword
                             onPasswordChanged: {
                                 if (correct) {
                                     password_value.color = "green"
-                                    ok_button.enabled=true
                                 }
                                 else {
                                     // TODO: password_value.color = defaultColor; // http://doc.qt.io/qt-5/qml-qtquick-systempalette.html
