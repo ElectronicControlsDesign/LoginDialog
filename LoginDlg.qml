@@ -106,10 +106,7 @@ Window {
                         verticalAlignment: Text.AlignVCenter
                         echoMode: TextInput.Password
                         onTextChanged: { LoginDlgPassword.setPassword(password_value.text)
-                            if(password_value.text != "")
-                                ok_button.enabled=true
-                            else
-                                ok_button.enabled=false
+                            ok_button.enabled = (password_value.text != "" ? true : false)
                         }
                         Connections {
                             target: LoginDlgPassword
